@@ -1,4 +1,4 @@
-module warpstone
+module github.com/pujo-j/warpstone
 
 go 1.14
 
