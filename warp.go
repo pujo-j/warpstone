@@ -1,10 +1,14 @@
 package warpstone
 
-import "github.com/cloudflare/circl/dh/sidh"
+import (
+	"github.com/cloudflare/circl/dh/sidh"
+	"io"
+)
 
 type Conn interface {
 	Send(msg []byte) error
 	Recv() ([]byte, error)
+	io.Closer
 }
 
 type ServerCrypto struct {

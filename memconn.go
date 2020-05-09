@@ -5,6 +5,18 @@ type memoryChannel struct {
 	c2 chan []byte
 }
 
+const ErrCloseChannel = errorString("panicked when closing channel")
+
+func (m *memoryChannel) Close() (err error) {
+	defer func() {
+		if r := recover(); r != nil {
+			err = ErrCloseChannel
+		}
+	}()
+	close(m.c1)
+	return
+}
+
 func newMemoryChannel() (Conn, Conn) {
 	c := memoryChannel{
 		c1: make(chan []byte, 1),

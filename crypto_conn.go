@@ -8,6 +8,10 @@ type cryptoConn struct {
 	sk   [32]byte
 }
 
+func (c *cryptoConn) Close() error {
+	return c.conn.Close()
+}
+
 func (c *cryptoConn) Send(msg []byte) error {
 	nonce := [24]byte{}
 	_, err := rand.Read(nonce[:])

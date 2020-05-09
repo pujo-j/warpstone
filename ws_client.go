@@ -11,6 +11,10 @@ type WSConn struct {
 	c *websocket.Conn
 }
 
+func (W *WSConn) Close() error {
+	return W.c.Close()
+}
+
 func (W *WSConn) Send(msg []byte) error {
 	return W.c.WriteMessage(websocket.BinaryMessage, msg)
 }
